@@ -24,6 +24,15 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       // TODO: Add app bar (102)
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.menu,
+            semanticLabel: "菜单",
+          ),
+          onPressed: () {
+            print('菜单按钮');
+          },
+        ),
         title: Text('SHRINE'),
       ),
       // TODO: Add a grid view (102)
