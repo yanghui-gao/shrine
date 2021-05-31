@@ -53,6 +53,21 @@ class _LoginPageState extends State<LoginPage> {
             // TODO: Wrap Password with AccentColorOverride (103)
             // TODO: Add TextField widgets (101)
             // TODO: Add button bar (101)
+            ButtonBar(
+              children: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      print("123");
+                    },
+                    child: Text('取消')),
+                ElevatedButton(
+                  child: Text('下一步'),
+                  onPressed: () {
+                    // TODO: Show the next page (101)
+                  },
+                ),
+              ],
+            )
           ],
         ),
       ),
