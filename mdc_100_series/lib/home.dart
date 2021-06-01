@@ -34,12 +34,62 @@ class HomePage extends StatelessWidget {
           },
         ),
         title: Text('SHRINE'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              print('点击了');
+            },
+            icon: Icon(
+              Icons.search,
+              semanticLabel: 'search',
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              print('123');
+            },
+            icon: Icon(
+              Icons.tune,
+              semanticLabel: 'filter',
+            ),
+          )
+        ],
       ),
       // TODO: Add a grid view (102)
-      body: Center(
-        child: Text('You did it!'),
-      ),
-      // TODO: Set resizeToAvoidBottomInset (101)
+      body: GridView.count(
+          crossAxisCount: 2,
+          padding: EdgeInsets.all(16.0),
+          childAspectRatio: 8.0 / 9.0,
+          children: _buildGridCards(10)),
     );
+  }
+
+  List<Card> _buildGridCards(int count) {
+    List<Card> cards = List.generate(
+      count,
+      (index) => Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AspectRatio(
+              aspectRatio: 18 / 11,
+              child: Image.asset('assets/diamond.png'),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(16, 12, 16, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('title'),
+                  SizedBox(height: 8),
+                  Text('Secondary Text'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+    return cards;
   }
 }
