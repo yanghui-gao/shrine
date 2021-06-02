@@ -13,6 +13,11 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/number_symbols_data.dart';
+
+import 'model/products_repository.dart';
+import 'model/product.dart';
 
 class HomePage extends StatelessWidget {
   // TODO: Make a collection of cards (102)
@@ -60,36 +65,52 @@ class HomePage extends StatelessWidget {
           crossAxisCount: 2,
           padding: EdgeInsets.all(16.0),
           childAspectRatio: 8.0 / 9.0,
-          children: _buildGridCards(10)),
+          children: _buildGridCards(context)),
     );
   }
 
-  List<Card> _buildGridCards(int count) {
-    List<Card> cards = List.generate(
-      count,
-      (index) => Card(
+  List<Card> _buildGridCards(BuildContext context) {
+    List<Product> products = ProductsRepository.loadProducts(Category.all);
+    if (products == null || products.isEmpty) {
+      return const <Card>[];
+    }
+    final ThemeData theme = Theme.of(context);
+    final NumberFormat formatter = NumberFormat.simpleCurrency(
+        locale: Localizations.localeOf(context).toString());
+    return products.map((product) {
+      return Card(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AspectRatio(
               aspectRatio: 18 / 11,
-              child: Image.asset('assets/diamond.png'),
+              child: Image.asset(
+                product.assetName,
+                package: product.assetPackage,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(16, 12, 16, 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('title'),
+                  Text(
+                    product.name,
+                    style: theme.textTheme.headline5,
+                    maxLines: 1,
+                  ),
                   SizedBox(height: 8),
-                  Text('Secondary Text'),
+                  Text(
+                    formatter.format(product.price),
+                    style: theme.textTheme.bodyText2,
+                  ),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-    return cards;
+      );
+    }).toList();
   }
 }
