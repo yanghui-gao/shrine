@@ -16,10 +16,10 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'Colors.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,6 +32,7 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       onGenerateRoute: _getRoute,
       // TODO: Add a theme (103)
+      theme: _kShrineTheme,
     );
   }
 
@@ -49,4 +50,26 @@ class ShrineApp extends StatelessWidget {
 }
 
 // TODO: Build a Shrine Theme (103)
+final ThemeData _kShrineTheme = _buildShrineTheme();
+ThemeData _buildShrineTheme() {
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+    accentColor: KshrineBrown900,
+    primaryColor: KshrinePink100,
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        primary: KshrinePink100,
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(Colors.black),
+        overlayColor: MaterialStateProperty.all(KshrinePink100),
+      ),
+    ),
+    scaffoldBackgroundColor: KshrineBackgroundWhite,
+    cardColor: KshrineBackgroundWhite,
+    errorColor: KshrineErrorRed,
+  );
+}
 // TODO: Build a Shrine Text Theme (103)
