@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: theme.textTheme.headline5,
+                    style: theme.textTheme.headline6,
                     maxLines: 1,
                   ),
                   SizedBox(height: 8),
